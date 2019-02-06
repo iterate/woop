@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
   if (title && title[0]) {
     res.json(title[0]);
   } else {
-    res.json([]);
+    res.json(null);
   }
 });
 
