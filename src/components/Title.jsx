@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import styled from "styled-components";
 
 const submitTitle = text => {
   return fetch("/api/title", {
@@ -9,6 +10,24 @@ const submitTitle = text => {
     body: JSON.stringify({ text })
   });
 };
+
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ExtremelyFancyTitle = styled.span`
+  @import url("https://fonts.googleapis.com/css?family=Snowburst+One");
+  font-family: "Snowburst One", cursive;
+  font-size: 30px;
+  margin: 10px;
+  text-transform: uppercase;
+`;
+
+const FormWrapper = styled.form`
+  display: flex;
+  align-items: center;
+`;
 
 const Title = () => {
   const intervalRef = useRef();
@@ -34,12 +53,12 @@ const Title = () => {
     return () => clearInterval(intervalRef.current);
   }, []);
   return (
-    <div>
-      {title}
-      <form onSubmit={onSubmit}>
+    <TitleWrapper>
+      <ExtremelyFancyTitle>{title}</ExtremelyFancyTitle>
+      <FormWrapper onSubmit={onSubmit}>
         <input placeholder="Title..." ref={inputRef} />
-      </form>
-    </div>
+      </FormWrapper>
+    </TitleWrapper>
   );
 };
 
