@@ -7,14 +7,17 @@
   "license": "MPL-2.0",
   "private": false,
   "scripts": {
-    "start": "node -r esm server.js",
+    "start": "node -r esm server/index.js",
+    "dev": "nodemon -r esm server/index.js",
     "watch": "parcel watch src/index.html",
     "build": "parcel build src/index.html",
     "clean": "rm -rf dist .cache"
   },
   "dependencies": {
     "cookie-session": "^2.0.0-beta.3",
+    "esm": "^3.2.1",
     "express": "^4.16.4",
+    "nodemon": "^1.18.9",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "prop-types": "^15.6.2",
