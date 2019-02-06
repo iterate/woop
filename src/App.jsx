@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
-import Header from "@/components/Header";
 import Editor from "@/components/Editor";
 import Feed from "@/components/Feed";
+import Header from "@/components/Header";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -22,13 +22,34 @@ const AppContainer = styled.div`
   }
 `;
 
-const App = () => (
-  <AppContainer>
-    <GlobalStyle />
-    <Header />
-    <Editor />
-    <Feed />
-  </AppContainer>
-);
+const App = () => {
+  const [posts, setPosts] = useState([]);
+  const intervalRef = useRef();
+
+  const updatePosts = () =>
+    fetch("/api/post")
+      .then(res => res.json())
+      .then(p => {
+        p.sort(
+          ({ createdAt: a }, { createdAt: b }) => new Date(b) - new Date(a)
+        );
+        setPosts(p);
+      });
+
+  useEffect(() => {
+    updatePosts();
+    intervalRef.current = setInterval(updatePosts, 3 * 1000);
+    return () => clearInterval(intervalRef.current);
+  }, []);
+
+  return (
+    <AppContainer>
+      <GlobalStyle />
+      <Header />
+      <Editor callback={updatePosts} />
+      <Feed posts={posts} />
+    </AppContainer>
+  );
+};
 
 export default App;
