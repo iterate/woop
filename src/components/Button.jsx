@@ -6,8 +6,16 @@ const Button = styled.button`
   background-image: linear-gradient(#eee, #ccc);
 
   :focus {
-    transform: rotate(2deg);
     outline: none;
+    transform: rotate(0.5deg);
+
+    @media (max-width: 1000px) {
+      transform: rotate(1deg);
+    }
+
+    @media (max-width: 600px) {
+      transform: rotate(2deg);
+    }
   }
 `;
 
