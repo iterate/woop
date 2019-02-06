@@ -4,9 +4,13 @@ import { User } from "../models/user";
 
 const router = express.Router();
 
-const mapPost = ({ id, userId, content, createdAt, updatedAt }) => ({
+const mapPost = ({ id, user, content, createdAt, updatedAt }) => ({
   id,
-  userId,
+  user: user && {
+    id: user.id,
+    name: user.name,
+    photo: user.photo
+  },
   content,
   createdAt,
   updatedAt
@@ -18,11 +22,11 @@ router.post("/", async (req, res) => {
     content: body.content,
     userId: req.user.id
   });
-  res.json(mapPost(post));
+  res.json(mapPost({ ...post.get({ plain: true }), user: req.user }));
 });
 
 router.get("/", async (req, res) => {
-  const posts = await Post.findAll();
+  const posts = await Post.findAll({ include: [User] });
   res.json(posts.map(mapPost));
 });
 
