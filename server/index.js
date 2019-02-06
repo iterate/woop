@@ -5,16 +5,6 @@ import { initialize as initializeAuth } from "./auth";
 
 const app = express();
 
-app.get("/auth", (req, res) => {
-  if (req.user) {
-    res.send(`Hello ${req.user.name}. <a href="/logout">Log out</a>`);
-  } else {
-    res.send(`<a href="/auth/google">Sign In with Google</a>`);
-  }
-});
-
-app.use(express.static("dist"));
-
 // store session state in browser cookie
 app.use(
   cookieSession({
@@ -23,6 +13,16 @@ app.use(
 );
 
 initializeAuth(app);
+
+app.use("*", (req, res, next) => {
+  if (!req.user) {
+    res.redirect("/auth/google");
+  } else {
+    next();
+  }
+});
+
+app.use(express.static("dist"));
 
 app.listen(1234);
 
