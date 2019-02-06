@@ -19,7 +19,9 @@ const Logo = styled.img`
 const Header = () => (
   <HeaderContainer>
     <Logo src="https://www.iterate.no/favicon.a7c7b321.png" alt="Logo" />
-    <Button>Logg ut</Button>
+    <a href="/logout">
+      <Button>Logg ut</Button>
+    </a>
   </HeaderContainer>
 );
 
