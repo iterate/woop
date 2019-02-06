@@ -14,6 +14,7 @@
     "clean": "rm -rf dist .cache"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "cookie-session": "^2.0.0-beta.3",
     "esm": "^3.2.1",
     "express": "^4.16.4",

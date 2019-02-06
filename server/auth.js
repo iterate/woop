@@ -20,7 +20,7 @@ passport.use(
       const mappedUser = mapProfile(profile);
       console.log("Logged in user", mappedUser);
       await User.upsert(mappedUser);
-      const user = await User.findById(mappedUser.id);
+      const user = await User.findByPk(mappedUser.id);
       if (user) {
         return done(null, user);
       } else {
@@ -35,7 +35,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id);
+  const user = await User.findByPk(id);
   if (user) {
     done(null, user.get());
   } else {
