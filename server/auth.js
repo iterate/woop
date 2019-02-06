@@ -1,6 +1,6 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
-const config = require("./client_id.json");
+const config = require("../client_id.json");
 
 const mapProfile = ({ id, displayName, photos }) => ({
   id,
@@ -30,7 +30,7 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
-const initialize = app => {
+export const initialize = app => {
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -54,5 +54,3 @@ const initialize = app => {
     res.redirect("/");
   });
 };
-
-module.exports = { initialize };
