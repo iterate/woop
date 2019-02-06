@@ -1,11 +1,12 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
 const config = require("../client_id.json");
+import { User } from "./models/user";
 
 const mapProfile = ({ id, displayName, photos }) => ({
   id,
   name: displayName,
-  photo: Array.isArray(photos) ? photos[0] : null
+  photo: Array.isArray(photos) ? photos[0].value : null
 });
 
 passport.use(
@@ -15,19 +16,31 @@ passport.use(
       clientSecret: config.web.client_secret,
       callbackURL: "http://localhost:1234/auth/google/callback"
     },
-    function(token, tokenSecret, profile, done) {
-      console.log("profile", profile);
-      done(null, mapProfile(profile));
+    async (token, tokenSecret, profile, done) => {
+      const mappedUser = mapProfile(profile);
+      console.log("Logged in user", mappedUser);
+      await User.upsert(mappedUser);
+      const user = await User.findByPk(mappedUser.id);
+      if (user) {
+        return done(null, user);
+      } else {
+        return done(null, false);
+      }
     }
   )
 );
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
+passport.serializeUser((user, done) => {
+  done(null, user.id);
 });
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
+passport.deserializeUser(async (id, done) => {
+  const user = await User.findByPk(id);
+  if (user) {
+    done(null, user.get());
+  } else {
+    done(user.errors, null);
+  }
 });
 
 export const initialize = app => {

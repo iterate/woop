@@ -1,6 +1,8 @@
 import express from "express";
 import cookieSession from "cookie-session";
+import bodyParser from "body-parser";
 import { initialize as initializeAuth } from "./auth";
+import postRouter from "./api/post";
 /* eslint-disable no-console */
 
 const app = express();
@@ -11,6 +13,7 @@ app.use(
     keys: ["keyboard cat", "secret2"]
   })
 );
+const jsonParser = bodyParser.json();
 
 initializeAuth(app);
 
@@ -21,6 +24,8 @@ app.use("*", (req, res, next) => {
     next();
   }
 });
+
+app.use("/api/post", jsonParser, postRouter);
 
 app.use(express.static("dist"));
 
