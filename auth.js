@@ -30,7 +30,7 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
-const initialize = app => {
+export const initialize = app => {
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -54,5 +54,3 @@ const initialize = app => {
     res.redirect("/");
   });
 };
-
-module.exports = { initialize };

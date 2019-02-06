@@ -1,8 +1,7 @@
+import express from "express";
+import cookieSession from "cookie-session";
+import { initialize as initializeAuth } from "./auth";
 /* eslint-disable no-console */
-
-const express = require("express");
-const cookieSession = require("cookie-session");
-const { initialize: initializeAuth } = require("./auth");
 
 const app = express();
 

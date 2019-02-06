@@ -7,7 +7,7 @@
   "license": "MPL-2.0",
   "private": false,
   "scripts": {
-    "start": "node server.js",
+    "start": "node -r esm server.js",
     "watch": "parcel watch src/index.html",
     "build": "parcel build src/index.html",
     "clean": "rm -rf dist .cache"
