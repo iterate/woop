@@ -4,7 +4,14 @@ import { User } from "../models/user";
 
 const router = express.Router();
 
-const mapPost = ({ id, user, content, createdAt, updatedAt }) => ({
+export const mapPost = ({
+  id,
+  user,
+  content,
+  createdAt,
+  updatedAt,
+  woops
+}) => ({
   id,
   user: user && {
     id: user.id,
@@ -13,7 +20,8 @@ const mapPost = ({ id, user, content, createdAt, updatedAt }) => ({
   },
   content,
   createdAt,
-  updatedAt
+  updatedAt,
+  woops
 });
 
 router.post("/", async (req, res) => {

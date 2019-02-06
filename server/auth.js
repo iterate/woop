@@ -39,7 +39,7 @@ passport.deserializeUser(async (id, done) => {
   if (user) {
     done(null, user.get());
   } else {
-    done(user.errors, null);
+    done("Failed to retrieve user", null);
   }
 });
 

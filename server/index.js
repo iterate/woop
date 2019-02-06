@@ -3,6 +3,7 @@ import cookieSession from "cookie-session";
 import bodyParser from "body-parser";
 import { initialize as initializeAuth } from "./auth";
 import postRouter from "./api/post";
+import woopRouter from "./api/woop";
 /* eslint-disable no-console */
 
 const app = express();
@@ -26,6 +27,7 @@ app.use("*", (req, res, next) => {
 });
 
 app.use("/api/post", jsonParser, postRouter);
+app.use("/api/woop", jsonParser, woopRouter);
 
 app.use(express.static("dist"));
 
