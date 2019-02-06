@@ -4,3 +4,6 @@ dist
 
 # Google auth
 client_id.json
+
+# Database
+database.sqlite
