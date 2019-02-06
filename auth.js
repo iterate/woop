@@ -32,6 +32,7 @@ passport.deserializeUser(function(user, done) {
 
 const initialize = app => {
   app.use(passport.initialize());
+  app.use(passport.session());
 
   app.get(
     "/auth/google",
@@ -45,6 +46,11 @@ const initialize = app => {
     res
   ) {
     // Successful authentication, redirect home.
+    res.redirect("/");
+  });
+
+  app.get("/logout", function(req, res) {
+    req.logout();
     res.redirect("/");
   });
 };
