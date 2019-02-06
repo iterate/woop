@@ -7,6 +7,9 @@
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
+  "env": {
+    "browser": true
+  },
   "rules": {
     "react/prop-types": "off"
   },

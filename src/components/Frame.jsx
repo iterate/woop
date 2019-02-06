@@ -5,6 +5,7 @@ import styled from "styled-components";
 const Iframe = styled.iframe`
   border: none;
   background-color: transparent;
+  width: 100%;
 `;
 
 const Frame = ({ id, html }) => {
