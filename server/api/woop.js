@@ -1,8 +1,7 @@
 import express from "express";
-import { Post } from "../models/post";
 import sequelize from "sequelize";
-import { User } from "../models/user";
-import { mapPost } from "./post";
+import Post from "../models/post";
+import User from "../models/user";
 
 const router = express.Router();
 

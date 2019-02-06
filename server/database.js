@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
 
-export const sequelize = new Sequelize("database", "username", "password", {
+const sequelize = new Sequelize("database", "username", "password", {
   dialect: "sqlite",
   // SQLite only
   storage: "./database.sqlite",
@@ -17,3 +17,5 @@ sequelize
   .catch(err => {
     console.error("Unable to connect to the database:", err);
   });
+
+export default sequelize;

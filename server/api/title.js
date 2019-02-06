@@ -1,7 +1,5 @@
 import express from "express";
-import sequelize from "sequelize";
-import { Title } from "../models/title";
-import { User } from "../models/user";
+import Title from "../models/title";
 
 const router = express.Router();
 
@@ -19,7 +17,11 @@ router.get("/", async (req, res) => {
     limit: 1,
     order: [["createdAt", "DESC"]]
   });
-  res.json(title && title[0]);
+  if (title && title[0]) {
+    res.json(title[0]);
+  } else {
+    res.json(null);
+  }
 });
 
 export default router;
