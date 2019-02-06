@@ -3,19 +3,26 @@ import styled from "styled-components";
 
 import Post from "@/components/Post";
 
-const FeedContainer = styled.div``;
+const FeedContainer = styled.div`
+  & > *:not(:first-child) {
+    margin-top: 10px;
+  }
+`;
 
-const Feed = () => (
-  <FeedContainer>
-    <Post
-      user={{
-        name: "Test Testman",
-        image:
-          "https://s3.amazonaws.com/fixd-wordpress-cdn/wp-content/uploads/2018/04/Picture-of-person.png"
-      }}
-      post={{ id: "123", html: "<p>test text</p>" }}
-    />
-  </FeedContainer>
-);
+const Feed = ({ posts }) => {
+  return (
+    <FeedContainer>
+      {posts.map(
+        ({ content: html, createdAt, id, user: { name, photo: image } }) => (
+          <Post
+            user={{ name, image }}
+            post={{ id, html, createdAt }}
+            key={id}
+          />
+        )
+      )}
+    </FeedContainer>
+  );
+};
 
 export default Feed;
