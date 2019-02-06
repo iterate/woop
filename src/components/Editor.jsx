@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Button from "@/components/Button";
@@ -23,11 +23,34 @@ const EditorInput = styled.textarea`
   }
 `;
 
-const Editor = () => (
-  <EditorContainer>
-    <EditorInput placeholder="<Woop... />" />
-    <Button>Submit</Button>
-  </EditorContainer>
-);
+const Editor = ({ callback }) => {
+  const [content, setContent] = useState("");
+
+  const onClick = () => {
+    fetch("/api/post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ content })
+    }).then(() => callback());
+    setContent("");
+  };
+
+  const onChange = event => {
+    setContent(event.target.value);
+  };
+
+  return (
+    <EditorContainer>
+      <EditorInput
+        placeholder="<Woop... />"
+        value={content}
+        onChange={onChange}
+      />
+      <Button onClick={onClick}>Submit</Button>
+    </EditorContainer>
+  );
+};
 
 export default Editor;

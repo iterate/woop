@@ -16,7 +16,7 @@ const ProfilePicture = styled.img`
 `;
 const UserName = styled.span``;
 
-const Post = ({ user, post }) => {
+const Post = ({ user, id }) => {
   return (
     <PostContainer>
       <PostHeader>

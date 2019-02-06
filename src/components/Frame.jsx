@@ -1,23 +1,18 @@
-import React, { useState } from "react";
-import { createPortal } from "react-dom";
+import React from "react";
 import styled from "styled-components";
 
 const Iframe = styled.iframe`
   border: none;
   background-color: transparent;
+  width: 100%;
 `;
 
-const Frame = ({ id, html }) => {
-  const [contentRef, setContentRef] = useState(null);
-  const mountNode = contentRef && contentRef.contentWindow.document.body;
-  // eslint-disable-next-line react/no-danger
-  const frameBody = <div dangerouslySetInnerHTML={{ __html: html }} />;
-
-  return (
-    <Iframe title={`iframe-${id}`} ref={setContentRef}>
-      {mountNode && createPortal(frameBody, mountNode)}
-    </Iframe>
-  );
-};
+const Frame = ({ id }) => (
+  <Iframe
+    title={`iframe-${id}`}
+    src={`/api/post/${id}`}
+    sandbox="allow-scripts allow-same-origin allow-forms"
+  />
+);
 
 export default Frame;
