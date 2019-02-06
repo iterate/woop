@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Frame from "@/components/Frame";
+import WoopButton from "@/components/WoopButton";
 
 const PostContainer = styled.div``;
 const PostHeader = styled.div`
@@ -23,6 +24,7 @@ const Post = ({ user, post }) => {
         <UserName>{user.name}</UserName>
       </PostHeader>
       <Frame id={post.id} html={post.html} />
+      <WoopButton id={post.id} woops={post.woops} />
     </PostContainer>
   );
 };
