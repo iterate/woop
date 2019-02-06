@@ -16,15 +16,15 @@ const ProfilePicture = styled.img`
 `;
 const UserName = styled.span``;
 
-const Post = ({ user, id }) => {
+const Post = ({ user, id, woops }) => {
   return (
     <PostContainer>
       <PostHeader>
         <ProfilePicture src={user.image} alt="" />
         <UserName>{user.name}</UserName>
       </PostHeader>
-      <Frame id={post.id} html={post.html} />
-      <WoopButton id={post.id} woops={post.woops} />
+      <Frame id={id} />
+      <WoopButton id={id} woops={woops} />
     </PostContainer>
   );
 };

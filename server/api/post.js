@@ -1,6 +1,6 @@
 import express from "express";
-import { Post } from "../models/post";
-import { User } from "../models/user";
+import Post from "../models/post";
+import User from "../models/user";
 
 const router = express.Router();
 

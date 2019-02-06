@@ -1,7 +1,7 @@
 import express from "express";
 import cookieSession from "cookie-session";
 import bodyParser from "body-parser";
-import { initialize as initializeAuth } from "./auth";
+import initializeAuth from "./auth";
 import postRouter from "./api/post";
 import woopRouter from "./api/woop";
 import titleRouter from "./api/title";
