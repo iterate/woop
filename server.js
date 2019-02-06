@@ -1,10 +1,29 @@
 /* eslint-disable no-console */
 
 const express = require("express");
+const cookieSession = require("cookie-session");
+const { initialize: initializeAuth } = require("./auth");
 
 const app = express();
 
+app.get("/auth", (req, res) => {
+  if (req.user) {
+    res.send(`Hello ${req.user.name}. <a href="/logout">Log out</a>`);
+  } else {
+    res.send(`<a href="/auth/google">Sign In with Google</a>`);
+  }
+});
+
 app.use(express.static("dist"));
+
+// store session state in browser cookie
+app.use(
+  cookieSession({
+    keys: ["keyboard cat", "secret2"]
+  })
+);
+
+initializeAuth(app);
 
 app.listen(1234);
 
