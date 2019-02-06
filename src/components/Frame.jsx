@@ -5,6 +5,7 @@ import styled from "styled-components";
 const Iframe = styled.iframe`
   border: none;
   background-color: transparent;
+  height: 300px;
   width: 100%;
 `;
 
@@ -15,7 +16,7 @@ const Frame = ({ id, html }) => {
   const frameBody = <div dangerouslySetInnerHTML={{ __html: html }} />;
 
   return (
-    <Iframe title={`iframe-${id}`} ref={setContentRef}>
+    <Iframe title={`iframe-${id}`} ref={setContentRef} scrolling="no">
       {mountNode && createPortal(frameBody, mountNode)}
     </Iframe>
   );

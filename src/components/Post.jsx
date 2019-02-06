@@ -14,6 +14,12 @@ const ProfilePicture = styled.img`
   height: 20px;
 `;
 const UserName = styled.span``;
+const Divider = styled.div`
+  height: 1px;
+  background-color: #ccc;
+  width: 90%;
+  margin: 24px auto;
+`;
 
 const Post = ({ user, post }) => {
   return (
@@ -23,6 +29,7 @@ const Post = ({ user, post }) => {
         <UserName>{user.name}</UserName>
       </PostHeader>
       <Frame id={post.id} html={post.html} />
+      <Divider />
     </PostContainer>
   );
 };
