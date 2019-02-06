@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import Button from "@/components/Button";
+
 const HeaderContainer = styled.div`
   display: flex;
   flex: 1;
@@ -9,11 +11,7 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-const LogOut = styled.button`
-  color: blue;
-  background-color: transparent;
-  border: none;
-`;
+
 const Logo = styled.img`
   height: 30px;
 `;
@@ -21,7 +19,7 @@ const Logo = styled.img`
 const Header = () => (
   <HeaderContainer>
     <Logo src="https://www.iterate.no/favicon.a7c7b321.png" alt="Logo" />
-    <LogOut>Logg ut</LogOut>
+    <Button>Logg ut</Button>
   </HeaderContainer>
 );
 
