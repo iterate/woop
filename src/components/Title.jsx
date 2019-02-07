@@ -51,12 +51,14 @@ const Title = () => {
   }, []);
   return (
     <TitleWrapper>
-      <TitleInput
-        onChange={onSubmit}
-        placeholder="Title..."
-        ref={inputRef}
-        value={title}
-      />
+      <form onSubmit={onSubmit}>
+        <TitleInput
+          onChange={e => setTitle(e.target.value)}
+          placeholder="Title..."
+          ref={inputRef}
+          value={title}
+        />
+      </form>
     </TitleWrapper>
   );
 };
