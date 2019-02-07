@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import Button from "@/components/Button";
+import PartyButton from "@/components/PartyButton";
 
 const EditorContainer = styled.div`
   display: flex;
@@ -48,7 +49,7 @@ const Editor = ({ callback }) => {
         value={content}
         onChange={onChange}
       />
-      <Button onClick={onClick}>Submit</Button>
+      <PartyButton onClick={onClick} />
     </EditorContainer>
   );
 };
