@@ -1,7 +1,7 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
+import React, { useState } from "react";
+import styled, { keyframes, css } from "styled-components";
 
-const bounce = keyframes`
+const bounceAnim = keyframes`
   from {
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
@@ -47,21 +47,44 @@ const WoopContainer = styled.div`
 const WoopButtonButton = styled.button`
   font-size: 20px;
 
-  :focus {
-    animation: ${bounce} 2s;
-  }
+  ${props =>
+    props.bounce &&
+    css`
+      animation: ${bounceAnim} 2s;
+    `}
 `;
 const Woops = styled.span`
-  color: red;
   font-size: 20px;
   margin-right: 8px;
 `;
 
-const WoopButton = ({ id, woops }) => (
-  <WoopContainer>
-    <Woops>{woops}</Woops>
-    <WoopButtonButton onClick={() => console.log(id)}>Woop</WoopButtonButton>
-  </WoopContainer>
-);
+const addWoop = (id, updatePosts) => {
+  return fetch(`/api/woop/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(() => updatePosts());
+};
+
+const WoopButton = ({ id, woops, updatePosts }) => {
+  const [bouncing, setBouncing] = useState(false);
+
+  return (
+    <WoopContainer>
+      <Woops>{woops}</Woops>
+      <WoopButtonButton
+        bounce={bouncing}
+        onClick={() => {
+          setBouncing(true);
+          setTimeout(() => setBouncing(false), 1500);
+          addWoop(id, updatePosts);
+        }}
+      >
+        Woop
+      </WoopButtonButton>
+    </WoopContainer>
+  );
+};
 
 export default WoopButton;

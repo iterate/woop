@@ -33,7 +33,7 @@ const PostFooter = styled.div`
   align-items: center;
 `;
 
-const Post = ({ user, id, woops, timestamp }) => {
+const Post = ({ user, id, woops, timestamp, updatePosts }) => {
   return (
     <PostContainer>
       <PostHeader>
@@ -52,7 +52,7 @@ const Post = ({ user, id, woops, timestamp }) => {
             🌐
           </span>
         </Link>
-        <WoopButton id={id} woops={woops} />
+      <WoopButton id={id} woops={woops} updatePosts={updatePosts} />
       </PostFooter>
       <Divider />
     </PostContainer>
