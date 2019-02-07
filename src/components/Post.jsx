@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { distanceInWordsToNow } from "date-fns";
 
 import Frame from "@/components/Frame";
 import WoopButton from "@/components/WoopButton";
@@ -15,6 +16,15 @@ const ProfilePicture = styled.img`
   height: 20px;
 `;
 const UserName = styled.span``;
+const Divider = styled.div`
+  height: 1px;
+  background-color: #ccc;
+  width: 90%;
+  margin: 24px auto;
+`;
+const Timestamp = styled.span`
+  float: right;
+`;
 
 const Post = ({ user, id, woops }) => {
   return (
@@ -22,9 +32,11 @@ const Post = ({ user, id, woops }) => {
       <PostHeader>
         <ProfilePicture src={user.image} alt="" />
         <UserName>{user.name}</UserName>
+        <Timestamp>{distanceInWordsToNow(post.createdAt)}</Timestamp>
       </PostHeader>
       <Frame id={id} />
       <WoopButton id={id} woops={woops} />
+      <Divider />
     </PostContainer>
   );
 };

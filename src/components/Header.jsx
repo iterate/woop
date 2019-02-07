@@ -22,7 +22,9 @@ const Header = () => {
     <HeaderContainer>
       <Logo src="https://www.iterate.no/favicon.a7c7b321.png" alt="Logo" />
       <Title />
-      <Button>Logg ut</Button>
+      <a href="/logout">
+        <Button>Logg ut</Button>
+      </a>
     </HeaderContainer>
   );
 };
