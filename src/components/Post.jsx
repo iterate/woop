@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { distanceInWordsToNow } from "date-fns";
 
-import Frame from "@/components/Frame";
+import PostFrame from "@/components/PostFrame";
 import WoopButton from "@/components/WoopButton";
 
 const PostContainer = styled.div``;
@@ -33,7 +33,7 @@ const PostFooter = styled.div`
   align-items: center;
 `;
 
-const Post = ({ user, id, woops, timestamp }) => {
+const Post = ({ user, id, woops, timestamp, updatePosts }) => {
   return (
     <PostContainer>
       <PostHeader>
@@ -41,7 +41,7 @@ const Post = ({ user, id, woops, timestamp }) => {
         <UserName>{user.name}</UserName>
         <Timestamp>{distanceInWordsToNow(timestamp)}</Timestamp>
       </PostHeader>
-      <Frame id={id} />
+      <PostFrame id={id} />
       <PostFooter>
         <Link
           href={`/api/post/${id}`}
@@ -52,7 +52,7 @@ const Post = ({ user, id, woops, timestamp }) => {
             🌐
           </span>
         </Link>
-        <WoopButton id={id} woops={woops} />
+      <WoopButton id={id} woops={woops} updatePosts={updatePosts} />
       </PostFooter>
       <Divider />
     </PostContainer>

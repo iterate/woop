@@ -47,7 +47,7 @@ const App = () => {
       <GlobalStyle />
       <Header />
       <Editor callback={updatePosts} />
-      <Feed posts={posts} />
+      <Feed posts={posts} updatePosts={updatePosts} />
     </AppContainer>
   );
 };

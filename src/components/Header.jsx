@@ -13,14 +13,9 @@ const HeaderContainer = styled.div`
   align-items: center;
 `;
 
-const Logo = styled.img`
-  height: 30px;
-`;
-
 const Header = () => {
   return (
     <HeaderContainer>
-      <Logo src="https://www.iterate.no/favicon.a7c7b321.png" alt="Logo" />
       <Title />
       <a href="/logout">
         <Button>Logg ut</Button>

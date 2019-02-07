@@ -9,7 +9,7 @@ const FeedContainer = styled.div`
   }
 `;
 
-const Feed = ({ posts }) => {
+const Feed = ({ posts, updatePosts }) => {
   return (
     <FeedContainer>
       {posts.map(({ id, woops, createdAt, user: { name, photo: image } }) => (
@@ -19,6 +19,7 @@ const Feed = ({ posts }) => {
           woops={woops}
           key={id}
           timestamp={createdAt}
+          updatePosts={updatePosts}
         />
       ))}
     </FeedContainer>

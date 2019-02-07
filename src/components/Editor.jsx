@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import Button from "@/components/Button";
 import PartyButton from "@/components/PartyButton";
+import Frame from "@/components/Frame";
 
 const EditorContainer = styled.div`
   display: flex;
@@ -50,6 +51,12 @@ const Editor = ({ callback }) => {
         onChange={onChange}
       />
       <PartyButton onClick={onClick} />
+      {content && content !== "" && (
+        <Frame
+          title="preview-frame"
+          src={`/api/preview/?post=${encodeURIComponent(content)}`}
+        />
+      )}
     </EditorContainer>
   );
 };

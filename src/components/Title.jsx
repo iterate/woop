@@ -16,17 +16,15 @@ const TitleWrapper = styled.div`
   flex-direction: row;
 `;
 
-const ExtremelyFancyTitle = styled.span`
+const TitleInput = styled.input`
   @import url("https://fonts.googleapis.com/css?family=Snowburst+One");
   font-family: "Snowburst One", cursive;
   font-size: 30px;
   margin: 10px;
   text-transform: uppercase;
-`;
-
-const FormWrapper = styled.form`
-  display: flex;
-  align-items: center;
+  background-color: transparent;
+  border: none;
+  outline: none;
 `;
 
 const Title = () => {
@@ -43,7 +41,6 @@ const Title = () => {
   const onSubmit = async e => {
     e.preventDefault();
     await submitTitle(inputRef.current.value);
-    inputRef.current.value = "";
     updateTitle();
   };
 
@@ -54,10 +51,12 @@ const Title = () => {
   }, []);
   return (
     <TitleWrapper>
-      <ExtremelyFancyTitle>{title}</ExtremelyFancyTitle>
-      <FormWrapper onSubmit={onSubmit}>
-        <input placeholder="Title..." ref={inputRef} />
-      </FormWrapper>
+      <TitleInput
+        onChange={onSubmit}
+        placeholder="Title..."
+        ref={inputRef}
+        value={title}
+      />
     </TitleWrapper>
   );
 };
