@@ -17,6 +17,10 @@ passport.use(
       callbackURL: "/auth/google/callback"
     },
     async (token, tokenSecret, profile, done) => {
+      // eslint-disable-next-line no-underscore-dangle
+      if (profile._json.domain !== "iterate.no") {
+        return done(new Error("Wrong domain!"));
+      }
       const mappedUser = mapProfile(profile);
       console.log("Logged in user", mappedUser);
       await User.upsert(mappedUser);
@@ -49,7 +53,11 @@ const initialize = app => {
   app.get(
     "/auth/google",
     passport.authenticate("google", {
-      scope: ["https://www.googleapis.com/auth/plus.login"]
+      hd: "iterate.no",
+      scope: [
+        "https://www.googleapis.com/auth/plus.login",
+        "https://www.googleapis.com/auth/plus.profile.emails.read"
+      ]
     })
   );
 
