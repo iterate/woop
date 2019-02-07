@@ -14,7 +14,7 @@ passport.use(
     {
       clientID: config.client_id,
       clientSecret: config.client_secret,
-      callbackURL: "http://localhost:1234/auth/google/callback"
+      callbackURL: "/auth/google/callback"
     },
     async (token, tokenSecret, profile, done) => {
       const mappedUser = mapProfile(profile);
