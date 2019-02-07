@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import Button from "@/components/Button";
+import Frame from "@/components/Frame";
 
 const EditorContainer = styled.div`
   display: flex;
@@ -49,6 +50,10 @@ const Editor = ({ callback }) => {
         onChange={onChange}
       />
       <Button onClick={onClick}>Submit</Button>
+      <Frame
+        title="preview-frame"
+        src={`/api/preview/?post=${encodeURIComponent(content)}`}
+      />
     </EditorContainer>
   );
 };
