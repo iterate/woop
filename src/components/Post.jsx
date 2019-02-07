@@ -26,16 +26,16 @@ const Timestamp = styled.span`
   float: right;
 `;
 
-const Post = ({ user, id, woops }) => {
+const Post = ({ user, id, woops, timestamp, updatePosts }) => {
   return (
     <PostContainer>
       <PostHeader>
         <ProfilePicture src={user.image} alt="" />
         <UserName>{user.name}</UserName>
-        <Timestamp>{distanceInWordsToNow(post.createdAt)}</Timestamp>
+        <Timestamp>{distanceInWordsToNow(timestamp)}</Timestamp>
       </PostHeader>
       <Frame id={id} />
-      <WoopButton id={id} woops={woops} />
+      <WoopButton id={id} woops={woops} updatePosts={updatePosts} />
       <Divider />
     </PostContainer>
   );

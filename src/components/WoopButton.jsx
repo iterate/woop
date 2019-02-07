@@ -52,15 +52,25 @@ const WoopButtonButton = styled.button`
   }
 `;
 const Woops = styled.span`
-  color: red;
   font-size: 20px;
   margin-right: 8px;
 `;
 
-const WoopButton = ({ id, woops }) => (
+const addWoop = (id, updatePosts) => {
+  return fetch(`/api/woop/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(() => updatePosts());
+};
+
+const WoopButton = ({ id, woops, updatePosts }) => (
   <WoopContainer>
     <Woops>{woops}</Woops>
-    <WoopButtonButton onClick={() => console.log(id)}>Woop</WoopButtonButton>
+    <WoopButtonButton onClick={() => addWoop(id, updatePosts)}>
+      Woop
+    </WoopButtonButton>
   </WoopContainer>
 );
 
