@@ -32,6 +32,10 @@ const Title = () => {
   const inputRef = useRef();
   const [title, setTitle] = useState("Woop");
 
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
   const updateTitle = async () => {
     const response = await fetch("/api/title");
     const { text } = await response.json();
