@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import Button from "@/components/Button";
+import PartyButton from "@/components/PartyButton";
 import Frame from "@/components/Frame";
 
 const EditorContainer = styled.div`
@@ -49,7 +50,7 @@ const Editor = ({ callback }) => {
         value={content}
         onChange={onChange}
       />
-      <Button onClick={onClick}>Submit</Button>
+      <PartyButton onClick={onClick} />
       {content && content !== "" && (
         <Frame
           title="preview-frame"
