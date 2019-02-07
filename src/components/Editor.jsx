@@ -29,6 +29,9 @@ const Editor = ({ callback }) => {
   const [content, setContent] = useState("");
 
   const onClick = () => {
+    if (content === "") {
+      return;
+    }
     fetch("/api/post", {
       method: "POST",
       headers: {
