@@ -9,7 +9,7 @@ const Iframe = styled.iframe`
 `;
 
 const Frame = ({ id }) => (
-  <Iframe 
+  <Iframe
     scrolling="no"
     title={`iframe-${id}`}
     src={`/api/post/${id}`}
