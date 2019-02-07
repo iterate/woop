@@ -50,6 +50,9 @@ const WoopButtonButton = styled.button`
   :focus {
     animation: ${bounce} 2s;
   }
+  .test {
+    animation: ${bounce} 2s;
+  }
 `;
 const Woops = styled.span`
   font-size: 20px;
@@ -68,7 +71,7 @@ const addWoop = (id, updatePosts) => {
 const WoopButton = ({ id, woops, updatePosts }) => (
   <WoopContainer>
     <Woops>{woops}</Woops>
-    <WoopButtonButton onClick={() => addWoop(id, updatePosts)}>
+    <WoopButtonButton className="test" onClick={() => addWoop(id, updatePosts)}>
       Woop
     </WoopButtonButton>
   </WoopContainer>
