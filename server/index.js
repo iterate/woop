@@ -5,6 +5,7 @@ import initializeAuth from "./auth";
 import postRouter from "./api/post";
 import woopRouter from "./api/woop";
 import titleRouter from "./api/title";
+import previewRouter from "./api/preview";
 /* eslint-disable no-console */
 
 const app = express();
@@ -30,6 +31,7 @@ app.use("*", (req, res, next) => {
 app.use("/api/post", jsonParser, postRouter);
 app.use("/api/woop", jsonParser, woopRouter);
 app.use("/api/title", jsonParser, titleRouter);
+app.use("/api/preview", previewRouter);
 
 app.use(express.static("dist"));
 
