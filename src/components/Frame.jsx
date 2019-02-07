@@ -8,11 +8,11 @@ const Iframe = styled.iframe`
   width: 100%;
 `;
 
-const Frame = ({ id }) => (
+const Frame = ({ title, src }) => (
   <Iframe
     scrolling="no"
-    title={`iframe-${id}`}
-    src={`/api/post/${id}`}
+    title={title}
+    src={src}
     sandbox="allow-scripts allow-same-origin allow-forms"
   />
 );
