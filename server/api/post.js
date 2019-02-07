@@ -26,7 +26,11 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const posts = await Post.findAll({ include: [User] });
+  const posts = await Post.findAll({
+    include: [User],
+    limit: 15,
+    order: [["createdAt", "DESC"]]
+  });
   res.json(posts.map(mapPost));
 });
 
