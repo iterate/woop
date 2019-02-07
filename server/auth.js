@@ -1,6 +1,6 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import passport from "passport";
-import config from "../client_id.json";
+import config from "./config";
 import User from "./models/user";
 
 const mapProfile = ({ id, displayName, photos }) => ({
@@ -12,11 +12,15 @@ const mapProfile = ({ id, displayName, photos }) => ({
 passport.use(
   new GoogleStrategy(
     {
-      clientID: config.web.client_id,
-      clientSecret: config.web.client_secret,
-      callbackURL: "http://localhost:1234/auth/google/callback"
+      clientID: config.client_id,
+      clientSecret: config.client_secret,
+      callbackURL: "/auth/google/callback"
     },
     async (token, tokenSecret, profile, done) => {
+      // eslint-disable-next-line no-underscore-dangle
+      if (profile._json.domain !== "iterate.no") {
+        return done(new Error("Wrong domain!"));
+      }
       const mappedUser = mapProfile(profile);
       console.log("Logged in user", mappedUser);
       await User.upsert(mappedUser);
@@ -49,7 +53,11 @@ const initialize = app => {
   app.get(
     "/auth/google",
     passport.authenticate("google", {
-      scope: ["https://www.googleapis.com/auth/plus.login"]
+      hd: "iterate.no",
+      scope: [
+        "https://www.googleapis.com/auth/plus.login",
+        "https://www.googleapis.com/auth/plus.profile.emails.read"
+      ]
     })
   );
 

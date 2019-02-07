@@ -25,6 +25,13 @@ const Divider = styled.div`
 const Timestamp = styled.span`
   float: right;
 `;
+const Link = styled.a`
+  text-decoration: none;
+`;
+const PostFooter = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const Post = ({ user, id, woops, timestamp, updatePosts }) => {
   return (
@@ -35,7 +42,18 @@ const Post = ({ user, id, woops, timestamp, updatePosts }) => {
         <Timestamp>{distanceInWordsToNow(timestamp)}</Timestamp>
       </PostHeader>
       <Frame id={id} />
+      <PostFooter>
+        <Link
+          href={`/api/post/${id}`}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span role="img" aria-label="internet">
+            🌐
+          </span>
+        </Link>
       <WoopButton id={id} woops={woops} updatePosts={updatePosts} />
+      </PostFooter>
       <Divider />
     </PostContainer>
   );
