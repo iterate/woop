@@ -50,10 +50,12 @@ const Editor = ({ callback }) => {
         onChange={onChange}
       />
       <Button onClick={onClick}>Submit</Button>
-      <Frame
-        title="preview-frame"
-        src={`/api/preview/?post=${encodeURIComponent(content)}`}
-      />
+      {content && content !== "" && (
+        <Frame
+          title="preview-frame"
+          src={`/api/preview/?post=${encodeURIComponent(content)}`}
+        />
+      )}
     </EditorContainer>
   );
 };
