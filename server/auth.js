@@ -74,6 +74,15 @@ const initialize = app => {
     req.logout();
     res.redirect("/");
   });
+
+  app.use((err, req, res, next) => {
+    if (err) {
+      req.logout(); // So deserialization won't continue to fail.
+      next();
+    } else {
+      next();
+    }
+  });
 };
 
 export default initialize;
