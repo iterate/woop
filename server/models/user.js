@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
-import { sequelize } from "../database";
+import sequelize from "../database";
 
-export const User = sequelize.define("user", {
+const User = sequelize.define("user", {
   id: {
     primaryKey: true,
     type: Sequelize.STRING
@@ -15,3 +15,5 @@ export const User = sequelize.define("user", {
 });
 
 User.sync();
+
+export default User;

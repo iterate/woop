@@ -1,7 +1,7 @@
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const passport = require("passport");
-const config = require("../client_id.json");
-import { User } from "./models/user";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import passport from "passport";
+import config from "../client_id.json";
+import User from "./models/user";
 
 const mapProfile = ({ id, displayName, photos }) => ({
   id,
@@ -23,9 +23,8 @@ passport.use(
       const user = await User.findByPk(mappedUser.id);
       if (user) {
         return done(null, user);
-      } else {
-        return done(null, false);
       }
+      return done(null, false);
     }
   )
 );
@@ -43,7 +42,7 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-export const initialize = app => {
+const initialize = app => {
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -54,16 +53,19 @@ export const initialize = app => {
     })
   );
 
-  app.get("/auth/google/callback", passport.authenticate("google"), function(
-    req,
-    res
-  ) {
-    // Successful authentication, redirect home.
-    res.redirect("/");
-  });
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google"),
+    (req, res) => {
+      // Successful authentication, redirect home.
+      res.redirect("/");
+    }
+  );
 
-  app.get("/logout", function(req, res) {
+  app.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
   });
 };
+
+export default initialize;

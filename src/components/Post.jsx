@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { distanceInWordsToNow } from "date-fns";
 
 import Frame from "@/components/Frame";
+import WoopButton from "@/components/WoopButton";
 
 const PostContainer = styled.div``;
 const PostHeader = styled.div`
@@ -25,7 +26,7 @@ const Timestamp = styled.span`
   float: right;
 `;
 
-const Post = ({ user, post }) => {
+const Post = ({ user, id, woops }) => {
   return (
     <PostContainer>
       <PostHeader>
@@ -33,7 +34,8 @@ const Post = ({ user, post }) => {
         <UserName>{user.name}</UserName>
         <Timestamp>{distanceInWordsToNow(post.createdAt)}</Timestamp>
       </PostHeader>
-      <Frame id={post.id} html={post.html} />
+      <Frame id={id} />
+      <WoopButton id={id} woops={woops} />
       <Divider />
     </PostContainer>
   );

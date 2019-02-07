@@ -1,8 +1,8 @@
 import Sequelize from "sequelize";
-import { sequelize } from "../database";
-import { User } from "./user";
+import sequelize from "../database";
+import User from "./user";
 
-export const Post = sequelize.define("post", {
+const Post = sequelize.define("post", {
   content: {
     type: Sequelize.STRING
   },
@@ -15,3 +15,5 @@ export const Post = sequelize.define("post", {
 Post.belongsTo(User);
 
 Post.sync();
+
+export default Post;

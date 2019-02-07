@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Title from "./Title";
 
 import Button from "@/components/Button";
 
@@ -16,13 +17,16 @@ const Logo = styled.img`
   height: 30px;
 `;
 
-const Header = () => (
-  <HeaderContainer>
-    <Logo src="https://www.iterate.no/favicon.a7c7b321.png" alt="Logo" />
-    <a href="/logout">
-      <Button>Logg ut</Button>
-    </a>
-  </HeaderContainer>
-);
+const Header = () => {
+  return (
+    <HeaderContainer>
+      <Logo src="https://www.iterate.no/favicon.a7c7b321.png" alt="Logo" />
+      <Title />
+      <a href="/logout">
+        <Button>Logg ut</Button>
+      </a>
+    </HeaderContainer>
+  );
+};
 
 export default Header;
