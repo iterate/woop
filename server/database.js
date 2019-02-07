@@ -1,13 +1,7 @@
 import Sequelize from "sequelize";
+import config from "./config";
 
-const sequelize = new Sequelize("database", "username", "password", {
-  dialect: "sqlite",
-  // SQLite only
-  storage: "./database.sqlite",
-
-  // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
-  operatorsAliases: false
-});
+const sequelize = new Sequelize(config.database_url);
 
 sequelize
   .authenticate()
